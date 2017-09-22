@@ -1,0 +1,241 @@
+:root {
+
+	--red: #f24141;
+	--red_dark: #c42b2b;
+}
+
+@font-face {
+
+	font-family: lato;
+	src: url('../fonts/Lato-Regular.ttf');
+}
+
+.btn {
+
+	border: 1px solid var(--red_dark);
+	border-radius: 3px;
+	padding: 6px;
+	cursor: pointer;
+	background-color: var(--red);
+	color: #fff;
+	font-size: 14px;
+	font-weight: bold;
+	box-shadow: inset 0px -3px 10px var(--red_dark);
+	outline: none; 
+}
+
+.btn:active {
+
+	box-shadow: inset 0px 3px 10px var(--red_dark);
+}
+
+* {
+
+	margin: 0px;
+	padding: 0px;
+}
+
+body, html {
+
+	height: 100%;
+}
+
+.wrapper {
+
+	text-align: center;
+}
+
+.container {
+
+	display: inline-block;
+	width: 50%;
+	margin-top: 30px;
+}
+
+header {
+
+	border-bottom: 1px solid #222;
+	height: 40px;
+	line-height: 40px;
+	text-align: left;
+}
+
+header h1 {
+
+	display: inline-block;
+	margin-left: 20px;
+}
+
+header a h1 {
+
+	color: var(--red);
+	text-shadow: 0px 1px 0px var(--red_dark);
+}
+
+header ul {
+
+	float: right;
+	list-style: none;
+}
+
+header ul li {
+
+	float: left;
+	margin-right: 30px;
+}
+
+header ul li a {
+
+}
+
+.grid {
+
+	display: grid;
+}
+
+._main {
+
+	grid-template-columns: 1fr 0.2fr;
+}
+
+nav {
+
+	padding-top: 20px;
+}
+
+nav div {
+
+	padding: 10px;
+	background-color: #efefef;
+	border-bottom: 1px solid #aaa;
+}
+
+nav div form input {
+
+	margin: 5px;
+}
+
+main {
+
+	padding: 10px;
+	text-align: left;
+}
+
+main a {
+
+	background-color: #fafafa;
+	display: block;
+	margin-top: 10px;
+	padding: 10px;
+	border-bottom: 1px solid #aaa;
+	position: relative;
+	height: 20px;
+	line-height: 20px;
+	color: black;
+	text-decoration: none;
+}
+
+main a:hover {
+
+	color: var(--red);
+	border-bottom-color: var(--red_dark);
+}
+
+main a i {
+
+	font-size: 14px;
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+}
+
+._article {
+
+}
+
+article, section {
+
+	float: left;
+	text-align: left;
+}
+
+article {
+
+	background-color: #eee;
+	padding: 10px;
+	width: 930px;
+	word-wrap: break-word;
+}
+
+section {
+
+	background-color: #fafafa;
+	padding: 10px;
+}
+
+.user_div {
+
+	padding: 10px;
+	background-color: #fafafa;
+	text-align: left;
+}
+
+#post_form {
+
+	display: inline-block;
+}
+
+#post_form input {
+
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding: 4px;
+	border: 1px solid #aaa;
+}
+
+#post_form textarea, #form_comment_art textarea {
+
+	width: 400px;
+	height: 200px;
+	padding: 4px;
+	border: 1px solid #aaa;
+}
+
+#article_comment_div {
+
+	text-align: center;
+	margin-top: 10px;
+	border: 1px solid #aaa;
+	padding: 4px;
+}
+
+#article_comment_div div {
+
+	text-align: left;
+	display: inline-block;
+	width: 900px;
+	word-wrap: break-word;
+	background-color: #eee;
+	margin: 10px;
+	padding: 4px;
+}
+
+#form_private_message p {
+
+	margin-top: 5px;
+	color: #555;
+	text-shadow: 1px 1px 1px #fff;
+}
+
+#form_private_message input {
+
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+#form_private_message textarea {
+
+	width: 400px;
+	height: 200px;
+	padding: 4px;
+}
