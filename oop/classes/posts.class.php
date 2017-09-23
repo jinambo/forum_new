@@ -2,6 +2,22 @@
 
 class posts {
 
+	public function checkAdmin($conn, $username) {
+
+	    $stmnt = $conn->prepare("SELECT * FROM users WHERE uid=?");
+	    $stmnt->bind_param("s", $st_check);
+
+	    $st_check = $username;
+
+	    $stmnt->execute();
+	    $results = $stmnt->get_result();
+
+	    $row = $results->fetch_assoc();
+
+	    if($row['admin'] == 1)
+	        return true;
+	}
+
 	function setPost($conn, $title, $content, $username) {
 
 		$max_len_title = 30;
@@ -86,13 +102,14 @@ class posts {
 	function setComment_Article($conn, $content, $op, $mid) {
 
 		$max_len_comment = 120;
+		$admin = $this->checkAdmin($conn, $_SESSION['209_uid']);
 
 		if (empty($content)) {
 		
 			exit("Err_comment_empty");
 		}
 
-		elseif (strpos($content, "/ban") !== false && $_SESSION['209_uid'] == "admin") {
+		elseif (strpos($content, "/ban") !== false && $admin == true) {
 
 			$stmnt = $conn->prepare("SELECT * FROM posts WHERE id=?");
 			$stmnt->bind_param("s", $st_id);
@@ -116,7 +133,7 @@ class posts {
 			echo "User ".$uid." has been banned!";
 		}
 
-		elseif (strpos($content, "/delete") !== false && $_SESSION['209_uid'] == "admin") {
+		elseif (strpos($content, "/delete") !== false && $admin == true) {
 
 			$stmnt = $conn->prepare("DELETE FROM posts WHERE id=?");
 			$stmnt->bind_param("s", $st_mid);
