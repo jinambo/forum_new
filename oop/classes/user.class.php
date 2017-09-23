@@ -73,34 +73,42 @@ class user {
 		$hash_pwd = $row['pwd'];
 		$hash = password_verify($password, $hash_pwd);
 
-		if ($hash == 0) {
+		if ($row['BAN'] == 1) {
 
-			exit("Wrong name/password!");
-			return false;
+			exit("Sorry, you are banned :(");
 		}
 
 		else {
 
-			$stmnt = $conn->prepare("SELECT * FROM users WHERE uid=? AND pwd=?");
-			$stmnt->bind_param("ss", $st_uid, $st_pwd);
-
-			$st_uid = $username;
-			$st_pwd = $hash_pwd;
-
-			$stmnt->execute();
-			$results = $stmnt->get_result();
-
-			$numRows = $results->num_rows;
-			$row = $results->fetch_assoc();
-
-			if ($numRows == 0) {
+			if ($hash == 0) {
 
 				exit("Wrong name/password!");
 				return false;
 			}
 
-			else
-				return $row['uid'];
+			else {
+
+				$stmnt = $conn->prepare("SELECT * FROM users WHERE uid=? AND pwd=?");
+				$stmnt->bind_param("ss", $st_uid, $st_pwd);
+
+				$st_uid = $username;
+				$st_pwd = $hash_pwd;
+
+				$stmnt->execute();
+				$results = $stmnt->get_result();
+
+				$numRows = $results->num_rows;
+				$row = $results->fetch_assoc();
+
+				if ($numRows == 0) {
+
+					exit("Wrong name/password!");
+					return false;
+				}
+
+				else
+					return $row['uid'];
+			}
 		}
 	}
 
@@ -118,12 +126,19 @@ class user {
 
 		if (empty($row['uid']) || empty($row['em'])) {
 
-			return "<h1 id='username_h1' class='invalid' style='color: var(--red);'>User ".$username." does not exist!</h1>";
+			echo "<h1 id='username_h1' class='invalid' style='color: var(--red);'>User ".$username." does not exist!</h1>";
 		}
 
 		else {
 
-			return "<h1 id='username_h1'>".$row['uid']."</h1><h3>".$row['em']."</h3>";
+			echo "<h1>".$row['uid']; 
+
+			if ($row['BAN'] == 1) {
+
+				echo " (<span id='username_h1' class='invalid' style='color: var(--red);'>Banned</span>)";
+			}
+
+			echo"</h1><h3>".$row['em']."</h3>";
 		}
 
 	}
@@ -148,7 +163,14 @@ class user {
 
 		while ($row = $results->fetch_assoc()) {
 
-			echo "<b>User : </b><a href='index.php?usr=".$row['uid']."'>".$row['uid']."</a> (".$row['em'].")<br>";
+			echo "<b>User : </b><a href='index.php?usr=".$row['uid']."'>".$row['uid'];
+
+			if ($row['BAN'] == 1) {
+
+				echo " [<span style='color: var(--red);'>Banned</span>]";
+			}
+
+			echo"</a>  (".$row['em'].")<br>";
 		}
 	}
 
@@ -211,7 +233,30 @@ class user {
 
 		while ($row = $results->fetch_assoc()) {
 
-			echo "<p>".$row['content']."</p><i>".$row['uid']."</i>";
+			echo "<div class='prv_msg'><p>".$row['content']."</p><i><a href='index.php?usr=".$row['uid']."'>".$row['uid']."</a></i></div>";
+		}
+	}
+
+	function checkUserBan($conn, $username) {
+
+		$stmnt = $conn->prepare("SELECT * FROM users WHERE uid=?");
+		$stmnt->bind_param("s", $st_uid);
+
+		$st_uid = $username;
+
+		$stmnt->execute();
+		$results = $stmnt->get_result();
+
+		$row = $results->fetch_assoc();
+
+		if ($row['BAN'] == 1) {
+
+			return true;
+		}
+
+		else {
+
+			return false;
 		}
 	}
 }

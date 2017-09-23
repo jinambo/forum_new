@@ -13,7 +13,7 @@
 	<link rel="stylesheet" type="text/css" href="CSS/style.css">
 </head>
 <body>
-
+<input type="hidden" id="session_token" value=<?php echo $_SESSION['209_uid']; ?>>
 <div class="wrapper">
 	<div class="container">
 		

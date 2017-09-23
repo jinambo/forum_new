@@ -28,7 +28,10 @@
 			<button class="btn" type="submit">Send</button><span class="pm_sent_succ" style="display: none;"> Sent!</span>
 		</form>
 
-		<?php getPm($conn, $_SESSION['209_uid']); ?>
+		<div id="div_private_message">
+			<h2>Inbox</h2>
+			<?php getPm($conn, $_SESSION['209_uid']); ?>
+		</div>
 
 	<?php else: ?>
 
@@ -41,7 +44,9 @@
 			</form>
 			<div id="div_user_search">
 				
-			</div>			
+			</div>
+
+			<style type="text/css"> .invalid { display:none; } </style>			
 
 		<?php else: ?>
 
@@ -57,6 +62,10 @@
 				<button class="btn" type="submit">Send</button><span class="pm_sent_succ" style="display: none;"> Sent!</span>
 			</form>
 			
+			<div id="user_posts">
+				<?php getContent($conn, $_GET['usr']); ?>
+			</div>
+
 			<script src="jquery.js"></script>
 			<script type="text/javascript">
 				

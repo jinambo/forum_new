@@ -29,6 +29,12 @@ function getPm($conn, $username) {
 	$pm->getPrivateMsg($conn, $username);
 }
 
+function checkBan($conn, $username) {
+
+	$ban = new user;
+	echo $ban->checkUserBan($conn, $username);
+}
+
 //=For Ajax=
 if (isset($_POST['showUsr_call'])) {
 
@@ -38,4 +44,9 @@ if (isset($_POST['showUsr_call'])) {
 if (isset($_POST['setPm_call'])) {
 
 	setPm($conn, $_POST['content'], $_POST['mid'], $_SESSION['209_uid']);
+}
+
+if (isset($_POST['checkBan_call'])) {
+
+	checkBan($conn, $_POST['uid']);
 }

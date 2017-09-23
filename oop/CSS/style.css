@@ -63,7 +63,6 @@ header {
 header h1 {
 
 	display: inline-block;
-	margin-left: 20px;
 }
 
 header a h1 {
@@ -121,7 +120,7 @@ main {
 	text-align: left;
 }
 
-main a {
+main a, #user_posts a {
 
 	background-color: #fafafa;
 	display: block;
@@ -135,13 +134,19 @@ main a {
 	text-decoration: none;
 }
 
-main a:hover {
+#user_posts a {
+
+	background-color: #fff;
+	box-shadow: 0px 0px 5px #ccc;
+}
+
+main a:hover, #user_posts a:hover {
 
 	color: var(--red);
 	border-bottom-color: var(--red_dark);
 }
 
-main a i {
+main a i, #user_posts a i {
 
 	font-size: 14px;
 	position: absolute;
@@ -157,13 +162,13 @@ article, section {
 
 	float: left;
 	text-align: left;
+	max-width: 934px;
 }
 
 article {
 
 	background-color: #eee;
 	padding: 10px;
-	width: 930px;
 	word-wrap: break-word;
 }
 
@@ -178,6 +183,7 @@ section {
 	padding: 10px;
 	background-color: #fafafa;
 	text-align: left;
+	position: relative;;
 }
 
 #post_form {
@@ -238,4 +244,46 @@ section {
 	width: 400px;
 	height: 200px;
 	padding: 4px;
+}
+
+#div_private_message {
+
+	background-color: var(--red);
+	color: #fff;
+	position: absolute;
+	top: 20px;
+	right: 30px;
+}
+
+#div_private_message h2 {
+
+	padding-left: 10px;
+	width: 400px;
+}
+
+.prv_msg {
+
+	width: 400px;
+	height: auto;
+	word-wrap: break-word;
+	overflow: hidden;
+	background-color: #fff;
+	border: 1px solid #aaa;
+	border-top: none;
+	padding: 10px;
+	color: #000;
+	position: relative;
+	max-height: 200px;
+}
+
+.prv_msg i {
+
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+}
+
+#div_user_search {
+
+	margin-top: 10px;
 }

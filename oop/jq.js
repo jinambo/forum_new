@@ -62,7 +62,7 @@ $(document).ready(function() {
 	});
 
 	//=GET CONTENT=
-	setInterval(function() {
+	/*setInterval(function() {
 
 		$.ajax({
 
@@ -75,7 +75,7 @@ $(document).ready(function() {
 			}
  		});
 
-	}, 5000);
+	}, 5000);*/
 
 	//=SET COMMENT=
 	$("#form_comment_art").submit(function(e) {
@@ -192,5 +192,30 @@ $(document).ready(function() {
 		});
 
 	});
+
+	//=CHECK BAN=
+	setInterval(function() {
+
+		var username = $("#session_token").val();
+
+		$.ajax({
+
+			method: "POST",
+			url: "users.inc.php",
+			data: {checkBan_call:true, uid:username},
+			success: function(response) {
+
+				if (response == 1) {
+
+					window.location.href = "signout.inc.php?banned";
+				}
+
+				else {
+
+					console.log("Not banned!");
+				}
+			}
+		});
+	}, 10000);
 
 });

@@ -34,7 +34,7 @@ class posts {
 
 	function getPost($conn, $username) {
 
-		$stmnt = $conn->prepare("SELECT * FROM posts WHERE op=? AND mid IS NULL");
+		$stmnt = $conn->prepare("SELECT * FROM posts WHERE op=? AND mid IS NULL ORDER BY id desc");
 		$stmnt->bind_param("s", $st_op);
 
 		$st_op = $username;
@@ -43,7 +43,7 @@ class posts {
 		$results = $stmnt->get_result();
 
 		while ($row = $results->fetch_assoc())
-			echo "<a href=index.php?art=".$row['id']."><b>Post : </b>".$row['content']."</a><br><br>";
+			echo "<a href='index.php?art=".$row['id']."'><h3>".$row['title']."</h3><i><b>".$row['op']."</b> (".$row['date_posted'].")</i></a>";
 	}
 
 	function showPost($conn) {
@@ -80,7 +80,7 @@ class posts {
 
 		$row = $results->fetch_assoc();
 
-		echo "<h1>".$row['title']."</h1><p>".$row['content']."</p><i>By: <a href='index.php?usr=".$row['op']."'>".$row['op']."</a></i>";			
+		echo "<h1>".$row['title']."</h1><p>".$row['content']."</p><i><b>By:</b> <a href='index.php?usr=".$row['op']."'>".$row['op']."</a></i>";			
 	}
 
 	function setComment_Article($conn, $content, $op, $mid) {
@@ -90,6 +90,49 @@ class posts {
 		if (empty($content)) {
 		
 			exit("Err_comment_empty");
+		}
+
+		elseif (strpos($content, "/ban") !== false && $_SESSION['209_uid'] == "admin") {
+
+			$stmnt = $conn->prepare("SELECT * FROM posts WHERE id=?");
+			$stmnt->bind_param("s", $st_id);
+
+			$st_id = $mid;
+
+			$stmnt->execute();
+			$results = $stmnt->get_result();
+
+			$row = $results->fetch_assoc();
+			$uid = $row['op'];
+
+			$stmnt = $conn->prepare("UPDATE users SET BAN=? WHERE uid=?");
+			$stmnt->bind_param("ss", $st_BAN, $st_uid);
+
+			$st_BAN = 1;
+			$st_uid = $uid;
+
+			$stmnt->execute();
+
+			echo "User ".$uid." has been banned!";
+		}
+
+		elseif (strpos($content, "/delete") !== false && $_SESSION['209_uid'] == "admin") {
+
+			$stmnt = $conn->prepare("DELETE FROM posts WHERE id=?");
+			$stmnt->bind_param("s", $st_mid);
+
+			$st_mid = $mid;
+
+			$stmnt->execute();
+
+			$stmnt = $conn->prepare("DELETE FROM posts WHERE mid=?");
+			$stmnt->bind_param("s", $st_mid);
+
+			$st_mid = $mid;
+
+			$stmnt->execute();
+
+			echo "Post has been deleted!";
 		}
 
 		elseif (strlen($content) > $max_len_comment) {
@@ -107,7 +150,7 @@ class posts {
 			$st_mid = $mid;
 
 			$stmnt->execute();
-				echo "<div><b>".$op." says : </b> <p>".$content."</p> </div>";
+				echo "<div><b><a href='index.php?usr=".$op."'>".$op."</a> says : </b> <p>".$content."</p> </div>";
 		}			
 	}
 

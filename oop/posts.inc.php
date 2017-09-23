@@ -14,9 +14,7 @@ function setContent($conn, $title, $content, $username) {
 	}
 }
 
-function getContent($conn) {
-
-	$uid = $_SESSION['209_uid'];
+function getContent($conn, $uid) {
 
 	$posts = new posts;
 	echo $posts->getPost($conn, $uid);
