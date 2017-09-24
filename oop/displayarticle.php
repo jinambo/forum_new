@@ -1,5 +1,6 @@
 <?php include 'posts.inc.php'; ?>
 
+<h1 style="font-weight: 400; margin-top: 10px;">Post</h1>
 <article>
 	<?php 
 		showArt($conn); 
@@ -7,6 +8,7 @@
 </article>
 <section>
 	<?php if (isset($_SESSION['209_uid'])): ?>
+	<h1 style="font-weight: 400; margin-bottom: 10px;">Comments</h1>
 		<form id="form_comment_art">
 			<h3>Create a comment</h3>
 			<textarea id="content_comment_art" placeholder="Comment..."></textarea>

@@ -3,7 +3,5 @@
  ?>
 
 <main>
-	
 	<?php showContent($conn); ?>
-
 </main>

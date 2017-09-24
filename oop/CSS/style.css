@@ -2,6 +2,10 @@
 
 	--red: #f24141;
 	--red_dark: #c42b2b;
+	--blue: #4286f4;
+	--blue_dark: #2f70d8;
+	--grey: #f9f9f9;
+	--grey_dark: #c4c4c4;
 }
 
 @font-face {
@@ -10,23 +14,58 @@
 	src: url('../fonts/Lato-Regular.ttf');
 }
 
-.btn {
+* {
 
-	border: 1px solid var(--red_dark);
+	font-family: lato;
+}
+
+button {
+
+	border: 1px solid var(--grey_dark);
 	border-radius: 3px;
-	padding: 6px;
+	padding: 3px;
+	padding-left: 12px;
+	padding-right: 12px;
 	cursor: pointer;
-	background-color: var(--red);
-	color: #fff;
-	font-size: 14px;
+	background-color: var(--grey);
+	color: #555;
+	font-size: 13px;
 	font-weight: bold;
-	box-shadow: inset 0px -3px 10px var(--red_dark);
+	box-shadow: inset 0px -5px 10px /*var(--grey_dark)*/ #e2e2e2;
 	outline: none; 
 }
 
-.btn:active {
+button:hover, button:active {
 
-	box-shadow: inset 0px 3px 10px var(--red_dark);
+	border: 1px solid var(--blue_dark);
+	background-color: var(--blue);
+	box-shadow: inset 0px -5px 10px var(--blue_dark);
+	color: #fff;
+
+}
+
+button:active {
+
+	box-shadow: inset 0px 5px 10px var(--blue_dark);
+}
+
+input, textarea {
+
+	border-radius: 3px;
+	padding: 3px;
+	border: 1px solid var(--grey_dark);
+	background-color: #fff;
+}
+
+textarea {
+
+	padding: 5px;
+}
+
+input:focus, textarea:focus {
+
+	outline: 0;
+	border-color: var(--blue);
 }
 
 * {
@@ -54,21 +93,30 @@ body, html {
 
 header {
 
-	border-bottom: 1px solid #222;
 	height: 40px;
 	line-height: 40px;
 	text-align: left;
+	border-bottom: 1px solid var(--grey_dark);
 }
 
 header h1 {
 
 	display: inline-block;
+	font-size: 25px;
+}
+
+header h1 img {
+
+	--size: 20px;
+	width: var(--size);
+	height: var(--size);
+	margin-right: -4px;
 }
 
 header a h1 {
 
-	color: var(--red);
-	text-shadow: 0px 1px 0px var(--red_dark);
+	color: #000;
+	font-weight: 400;
 }
 
 header ul {
@@ -85,6 +133,23 @@ header ul li {
 
 header ul li a {
 
+	text-decoration: none;
+	color: #222;
+	padding: 5px;
+}
+
+header ul li a:hover {
+
+	color: var(--blue_dark);
+	text-decoration: underline;
+}
+
+footer {
+
+	background-color: var(--grey);
+	border-top: 1px solid var(--grey_dark);
+	padding: 4px;
+	text-align: left;
 }
 
 .grid {
@@ -99,14 +164,32 @@ header ul li a {
 
 nav {
 
-	padding-top: 20px;
+	padding-top: 10px;
 }
 
 nav div {
 
-	padding: 10px;
-	background-color: #efefef;
+	background-color: #fff;
+	border: 1px solid #aaa;
+	border-radius: 4px;
+}
+
+nav div h3 {
+
+	background-color: #fafafa;
+	padding: 2px;
 	border-bottom: 1px solid #aaa;
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+	margin-bottom: 4px;
+	font-weight: 400;
+}
+
+nav div form {
+
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-bottom: 10px;
 }
 
 nav div form input {
@@ -114,48 +197,80 @@ nav div form input {
 	margin: 5px;
 }
 
+nav div form button {
+
+	margin-top: 4px;
+}
+
 main {
 
-	padding: 10px;
 	text-align: left;
+	margin: 10px;
+	border: 1px solid var(--grey_dark);
+	border-radius: 4px;
+	padding-top: 4px;
+	padding-bottom: 4px;
 }
+
+/*POSTS*/
 
 main a, #user_posts a {
 
-	background-color: #fafafa;
+	background-color: #fff;
 	display: block;
-	margin-top: 10px;
-	padding: 10px;
-	border-bottom: 1px solid #aaa;
 	position: relative;
 	height: 20px;
 	line-height: 20px;
 	color: black;
 	text-decoration: none;
+	padding: 10px;
 }
 
-#user_posts a {
+main a:nth-child(even), #user_posts a:nth-child(even) {
 
-	background-color: #fff;
-	box-shadow: 0px 0px 5px #ccc;
+	background-color: #fafafa;
+}
+
+main a:nth-child(odd), #user_posts a:nth-child(odd) {
+
+	background-color: #eee;
+}
+
+main a h3 {
+
+	font-size: 18px;
+	font-weight: 400
+}
+
+#user_posts {
+
+	text-align: left;
+	border: 1px solid var(--grey_dark);
+	padding-top: 4px;
+	padding-bottom: 4px;
+	border-radius: 4px;
+	margin-top: 20px;
+}
+
+#user_posts a h3 {
+
+	font-weight: 400;
 }
 
 main a:hover, #user_posts a:hover {
 
-	color: var(--red);
-	border-bottom-color: var(--red_dark);
+	background-color: var(--blue);
+	color: #fff;
+	font-size: 18px;
 }
 
 main a i, #user_posts a i {
 
 	font-size: 14px;
 	position: absolute;
-	bottom: 10px;
-	right: 10px;
-}
-
-._article {
-
+	bottom: 0px;
+	right: 0px;
+	padding: 10px;
 }
 
 article, section {
@@ -165,30 +280,57 @@ article, section {
 	max-width: 934px;
 }
 
+/*=ARTICLE=*/
+
 article {
 
-	background-color: #eee;
+	margin-top: 10px;
+	margin-bottom: 10px;
 	padding: 10px;
 	word-wrap: break-word;
+	border: 1px solid var(--grey_dark);
 }
 
-section {
+article h1 {
 
-	background-color: #fafafa;
-	padding: 10px;
+	padding: 4px;
+	padding-left: 8px;
+	margin: -10px;
+	margin-bottom: 10px;
+	background-color: var(--grey);
+	border-bottom: 1px solid var(--grey_dark);
 }
+
+/*=user div=*/
 
 .user_div {
 
-	padding: 10px;
-	background-color: #fafafa;
 	text-align: left;
-	position: relative;;
+	position: relative;
+	padding: 10px;
 }
+
+/*=POSTS - USER=*/
 
 #post_form {
 
 	display: inline-block;
+	vertical-align: top;
+	border: 1px solid var(--grey_dark);
+	padding: 10px;
+	text-align: left;
+	margin-top: 10px;
+	margin-bottom: 20px;
+}
+
+#post_form h3 {
+
+	background-color: var(--grey);
+	padding: 4px;
+	padding-left: 8px;
+	border-bottom: 1px solid var(--grey_dark);
+	margin: -10px;
+	margin-bottom: 5px;
 }
 
 #post_form input {
@@ -196,34 +338,97 @@ section {
 	margin-top: 10px;
 	margin-bottom: 10px;
 	padding: 4px;
-	border: 1px solid #aaa;
 }
 
 #post_form textarea, #form_comment_art textarea {
 
 	width: 400px;
 	height: 200px;
+}
+
+#post_form button {
+
+	margin-top: 10px;
+}
+
+/*=COMMENTS=*/
+
+#form_comment_art {
+
+	border: 1px solid var(--grey_dark);
+	display: inline-block;
+	padding: 10px;
+}
+
+#form_comment_art h3 {
+
 	padding: 4px;
-	border: 1px solid #aaa;
+	padding-left: 8px;
+	background-color: var(--grey);
+	margin: -10px;
+	margin-bottom: 10px;
+	border-bottom: 1px solid var(--grey_dark);
 }
 
 #article_comment_div {
 
 	text-align: center;
 	margin-top: 10px;
-	border: 1px solid #aaa;
-	padding: 4px;
+	border: 1px solid var(--grey_dark);
+	padding: 0px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-radius: 4px;
 }
 
 #article_comment_div div {
 
 	text-align: left;
-	display: inline-block;
-	width: 900px;
 	word-wrap: break-word;
-	background-color: #eee;
-	margin: 10px;
 	padding: 4px;
+	padding-left: 8px;
+}
+
+#article_comment_div div:nth-child(even) {
+
+	background-color: #fafafa;
+}
+
+#article_comment_div div:nth-child(odd) {
+
+	background-color: #eee;
+}
+
+/*=PRIVATE MESSAGES=*/
+
+.container_private_message {
+
+	display: inline-block;
+}
+
+.section_private_message {
+
+	display: grid;
+	grid-template-rows: 1fr 1fr;
+	background-color: #fff;
+}
+
+#form_private_message {
+
+	display: inline-block;
+	background-color: #fff;
+	border: 1px solid var(--grey_dark);
+	padding: 10px;
+}
+
+#form_private_message h3 {
+
+	background-color: var(--grey);
+	border-bottom: 1px solid var(--grey_dark);
+	padding: 4px;
+	padding-left: 8px;
+	margin: -10px;
+	margin-bottom: 10px;
 }
 
 #form_private_message p {
@@ -243,27 +448,34 @@ section {
 
 	width: 400px;
 	height: 200px;
-	padding: 4px;
+}
+
+#form_private_message button {
+
+	margin-top: 10px;
 }
 
 #div_private_message {
 
-	background-color: var(--red);
+	vertical-align: top;
+	display: inline-block;
 	color: #fff;
-	position: absolute;
-	top: 20px;
-	right: 30px;
+	overflow: hidden;
 }
 
-#div_private_message h2 {
+#div_private_message h3 {
 
-	padding-left: 10px;
-	width: 400px;
+	background-color: var(--grey);
+	border: 1px solid var(--grey_dark);
+	border-top: none;
+	padding: 4px;
+	padding-bottom: 5px;
+	padding-left: 8px;
+	color: #000;
 }
 
 .prv_msg {
 
-	width: 400px;
 	height: auto;
 	word-wrap: break-word;
 	overflow: hidden;
@@ -283,7 +495,30 @@ section {
 	right: 10px;
 }
 
+#form_user_search {
+
+	text-align: left;
+}
+
 #div_user_search {
 
+	text-align: left;
 	margin-top: 10px;
+}
+
+/*=USER INFO=*/
+
+.div_user_info {
+
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.div_user_info h1::before {
+
+}
+
+.div_user_info h1 {
+
+	font-weight: 400;
 }

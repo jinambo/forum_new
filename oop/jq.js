@@ -114,6 +114,7 @@ $(document).ready(function() {
 						
 						var current_msg = $("#article_comment_div_top").html();
 
+						$("#no_comments").hide();
 						$("#article_comment_div_top").hide().html(response).fadeIn(300).append(current_msg);
 						$("#content_comment_art").val("");
 					}
@@ -180,6 +181,11 @@ $(document).ready(function() {
 				else if (response == "Err_pm_long") {
 
 					alert("Your private message is too long (250 characters max!)");
+				}
+
+				else if (response == "BAN") {
+
+					alert("Banned successfully!");
 				}
 
 				else {

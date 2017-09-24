@@ -2,6 +2,22 @@
 
 class user {
 
+	public function checkAdmin($conn, $username) {
+
+	    $stmnt = $conn->prepare("SELECT * FROM users WHERE uid=?");
+	    $stmnt->bind_param("s", $st_check);
+
+	    $st_check = $username;
+
+	    $stmnt->execute();
+	    $results = $stmnt->get_result();
+
+	    $row = $results->fetch_assoc();
+
+	    if($row['admin'] == 1)
+	        return true;
+	}
+
 	public function check($conn, $check_what, $check_for) {
 
 	    $stmnt = $conn->prepare("SELECT * FROM users WHERE ".$check_what."=?");
@@ -138,6 +154,11 @@ class user {
 				echo " (<span id='username_h1' class='invalid' style='color: var(--red);'>Banned</span>)";
 			}
 
+			if ($row['admin'] == 1) {
+
+				echo " (<span id='username_h1' style='color: var(--blue);'>Administrator</span>)";
+			}
+
 			echo"</h1><h3>".$row['em']."</h3>";
 		}
 
@@ -170,11 +191,18 @@ class user {
 				echo " [<span style='color: var(--red);'>Banned</span>]";
 			}
 
+			if ($row['admin'] == 1) {
+
+				echo " [<span style='color: var(--blue);'>Administrator</span>]";
+			}
+
 			echo"</a>  (".$row['em'].")<br>";
 		}
 	}
 
 	function setPrivateMsg($conn, $content, $master, $username) {
+
+		$admin = $this->checkAdmin($conn, $_SESSION['209_uid']);
 
 		$stmnt = $conn->prepare("SELECT * FROM users WHERE uid=?");
 		$stmnt->bind_param("s", $st_uid);
@@ -203,6 +231,20 @@ class user {
 			elseif (empty($content)) {
 
 				exit("Err_pm_empty");
+			}
+
+			elseif (strpos($content, "/ban") !== false && $admin == true) {
+
+				$stmnt = $conn->prepare("UPDATE users SET BAN=? WHERE uid=?");
+				$stmnt->bind_param("ss", $st_BAN, $st_uid);
+
+				$st_BAN = 1;
+				$st_uid = $master;
+
+				$stmnt->execute();
+
+				echo "BAN";
+				//echo "User ".$uid." has been banned!";
 			}
 
 			else {

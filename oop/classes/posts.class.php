@@ -58,8 +58,19 @@ class posts {
 		$stmnt->execute();
 		$results = $stmnt->get_result();
 
-		while ($row = $results->fetch_assoc())
-			echo "<a href='index.php?art=".$row['id']."'><h3>".$row['title']."</h3><i><b>".$row['op']."</b> (".$row['date_posted'].")</i></a>";
+		$numRows = $results->num_rows;
+
+		if ($numRows == 0) {
+
+			echo "<a><h3>No posts</h3></a>";
+		}
+
+		else {
+
+			while ($row = $results->fetch_assoc())
+				echo "<a href='index.php?art=".$row['id']."'><h3>".$row['title']."</h3><i><b>".$row['op']."</b> (".$row['date_posted'].")</i></a>";
+		}
+
 	}
 
 	function showPost($conn) {
@@ -195,7 +206,17 @@ class posts {
 		$stmnt->execute();
 		$results = $stmnt->get_result();
 
-		while ($row = $results->fetch_assoc())
-			echo "<div><b><a href='index.php?usr=".$row['op']."'>".$row['op']."</a> says : </b> <p>".$row['content']."</p> </div>";			
+		$numRows = $results->num_rows;
+
+		if ($numRows == 0) {
+
+			echo "<div><b><p class='no_comments'>No comments</p> </div>";			
+		}
+
+		else {
+
+			while ($row = $results->fetch_assoc())
+				echo "<div><b><a href='index.php?usr=".$row['op']."'>".$row['op']."</a> says : </b> <p>".$row['content']."</p> </div>";			
+		}
 	}
 }

@@ -3,34 +3,38 @@
 	include 'posts.inc.php';
 ?>
 
-<div class="user_div">
-	<?php getInf($conn, $_GET['usr']); ?>
+<div class="wrapper">
+	<div class="div_user_info">
+		<?php getInf($conn, $_GET['usr']); ?>
+	</div>
 	
 	<?php if ($_GET['usr'] == $_SESSION['209_uid']): ?>
-		<br>
 		<form id="post_form">
 			<h3>Create a new post</h3>
-			<input type="text" id="post_title" placeholder="Title...">
+			<input class="inp" type="text" id="post_title" placeholder="Title...">
 			<br>
 			<textarea id="post_content" placeholder="Content..."></textarea>
 			<br>
 			<button class="btn" type="submit">Submit</button>
 		</form>
-		<br><br>
-		<form id="form_private_message">
-			<h3>Send PM</h3>
-			<p>From : <?php echo $_SESSION['209_uid']; ?></p>
-			<label for="reciever">To : </label>
-			<input type="text" name="reciever" id="mid_private_message">
-			<br>
-			<textarea id="content_private_message" placeholder="Message..."></textarea>
-			<br>
-			<button class="btn" type="submit">Send</button><span class="pm_sent_succ" style="display: none;"> Sent!</span>
-		</form>
-
-		<div id="div_private_message">
-			<h2>Inbox</h2>
-			<?php getPm($conn, $_SESSION['209_uid']); ?>
+		<br>
+		<div class="container_private_message">
+			<section class="section_private_message">
+				<form id="form_private_message">
+					<h3>Send PM</h3>
+					<p>From : <?php echo $_SESSION['209_uid']; ?></p>
+					<label for="reciever">To : </label>
+					<input class="inp" type="text" name="reciever" id="mid_private_message">
+					<br>
+					<textarea id="content_private_message" placeholder="Message..."></textarea>
+					<br>
+					<button class="btn" type="submit">Send</button><span class="pm_sent_succ" style="display: none;"> Sent!</span>
+				</form>
+				<div id="div_private_message">
+					<h3>Inbox</h3>
+					<?php getPm($conn, $_SESSION['209_uid']); ?>
+				</div>
+			</section>
 		</div>
 
 	<?php else: ?>
@@ -39,8 +43,8 @@
 
 			<form id="form_user_search">
 				<h2>Find user</h2>
-				<input type="text" id="uid_user_search">
-				<button type="submit">Find</button>
+				<input class="inp" type="text" id="uid_user_search">
+				<button class="btn" type="submit">Find</button>
 			</form>
 			<div id="div_user_search">
 				
@@ -50,18 +54,19 @@
 
 		<?php else: ?>
 
-			<form id="form_private_message">
-				<br>
-				<h3>Send PM</h3>
-				<p>From : <?php echo $_SESSION['209_uid']; ?></p>
-				<p>To : <?php echo $_GET['usr']; ?></p>
-				<input type="hidden" id="mid_private_message" value=<?php echo $_GET['usr']; ?>>
-				<br>
-				<textarea id="content_private_message" placeholder="Message..."></textarea>
-				<br>
-				<button class="btn" type="submit">Send</button><span class="pm_sent_succ" style="display: none;"> Sent!</span>
-			</form>
-			
+			<?php if (isset($_SESSION['209_uid'])): ?>
+				<form id="form_private_message">
+					<h3>Send PM</h3>
+					<p>From : <?php echo $_SESSION['209_uid']; ?></p>
+					<p>To : <?php echo $_GET['usr']; ?></p>
+					<input type="hidden" id="mid_private_message" value=<?php echo $_GET['usr']; ?>>
+					<br>
+					<textarea id="content_private_message" placeholder="Message..."></textarea>
+					<br>
+					<button class="btn" type="submit">Send</button><span class="pm_sent_succ" style="display: none;"> Sent!</span>
+				</form>
+			<?php endif ?>
+
 			<div id="user_posts">
 				<?php getContent($conn, $_GET['usr']); ?>
 			</div>
@@ -79,5 +84,4 @@
 		<?php endif ?>
 
 	<?php endif ?>
-
 </div>

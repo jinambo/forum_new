@@ -1,5 +1,5 @@
 <header>
-	<a href="index.php"><h1>Forum</h1></a>
+	<a href="index.php"><h1><img src="imgs/logo.png"> Mind corner</h1></a>
 
 	<ul>
 		<li><a href="index.php">Posts</a></li>

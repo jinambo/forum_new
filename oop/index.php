@@ -11,6 +11,7 @@
 		Forum		
 	</title>
 	<link rel="stylesheet" type="text/css" href="CSS/style.css">
+	<link rel="stylesheet" type="text/css" href="CSS/css/font-awesome.min.css">
 </head>
 <body>
 <input type="hidden" id="session_token" value=<?php echo $_SESSION['209_uid']; ?>>
@@ -61,6 +62,7 @@
 
 	</div>
 </div>
+
 
 <script src="jquery.js"></script>
 <script type="text/javascript" src="jq.js"></script>
